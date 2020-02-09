@@ -18,6 +18,7 @@ const initialState = {
 export const carReducer = (state = initialState, action) => {
     switch (action.type) {
         case "ADD_ITEM":
+            console.log('ADD_ITEM', state.additionalPrice);
             return {
                 ...state,
                 additionalPrice: action.payload.price + state.additionalPrice,
@@ -26,12 +27,13 @@ export const carReducer = (state = initialState, action) => {
                     features: [...state.car.features, action.payload],
                     price: state.car.price + action.payload.price
                 },
+                //their being filtered so the added features will not be at Additional Features list anymore
                 additionalFeatures: state.additionalFeatures.filter(element => {
                     return element.id !== action.payload.id;
                 })
             }
-
         case "REMOVE_ITEM":
+            console.log('REMOVE_ITEM', action);
                 return {
                     ...state,
                     additionalPrice: state.additionalPrice - action.payload.price,
